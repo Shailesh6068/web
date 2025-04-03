@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PG Finder - Futuristic</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(180deg, #0f172a, #1e293b);
+            color: #e2e8f0;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #00c9ff, #92fe9d);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        /* PG Listings */
+        .pg-listing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* PG Card */
+        .pg-card {
+            background: #1e293b;
+            border: 1px solid #4a5568;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 255, 255, 0.2);
+        }
+
+        .pg-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 255, 255, 0.4);
+        }
+
+        .pg-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* PG Card Content */
+        .pg-card-content {
+            padding: 15px;
+        }
+
+        .pg-card-content h3 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #00c9ff;
+            text-transform: uppercase;
+        }
+
+        .pg-card-content p {
+            margin: 8px 0;
+            font-size: 0.95em;
+        }
+
+        /* Amenities */
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .amenities span {
+            background: rgba(0, 255, 255, 0.2);
+            color: #00c9ff;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+
+        .amenities span:hover {
+            background: rgba(0, 255, 255, 0.5);
+        }
+
+        /* Button */
+        .pg-card-content a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 12px 20px;
+            background: linear-gradient(90deg, #00c9ff, #92fe9d);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1em;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pg-card-content a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 255, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <header>Find Your Futuristic PG</header>
+    <div class="container">
+        <div class="pg-listing" id="pgListing">
+            <!-- PG cards will be inserted dynamically -->
+        </div>
+    </div>
+
+    <script>
+        const pgData = [
+            { 
+                name: "Cyber Stays", owner: "Zolo Living", price: 12000, rating: 4.2, 
+                facilities: ["🚀 WiFi", "🚗 Parking", "🍽️ Meals", "🧺 Laundry"],
+                latitude: 18.651940985253983, longitude: 73.76167914045432,  // New York (Example)
+            },
+            { 
+                name: "Neon Habitat", owner: "CoHo Living", price: 15000, rating: 4.5, 
+                facilities: ["🌐 High-Speed Internet", "🏋️ Gym", "🏊 Swimming Pool", "🍕 Free Meals"],
+                latitude: 18.656638434701218,  longitude: 73.76109886348935,  // San Francisco (Example)
+            },
+            { 
+                name: "Infinity Residence", owner: "Stanza Living", price: 10000, rating: 4.0, 
+                facilities: ["📶 WiFi", "🧼 Laundry", "🍲 Meals", "🔐 24x7 Security"],
+                latitude: 73.76109886348935, longitude: 73.76109886348935,  // Los Angeles (Example)
+            }
+        ];
+
+        function renderPGs() {
+            const pgListing = document.getElementById("pgListing");
+            pgListing.innerHTML = pgData.map(pg => `
+                <div class="pg-card">
+                    <img src="https://via.placeholder.com/300x200" alt="${pg.name}">
+                    <div class="pg-card-content">
+                        <h3>${pg.name}</h3>
+                        <p><strong>Owner:</strong> ${pg.owner}</p>
+                        <p><strong>Price:</strong> ₹${pg.price}/month</p>
+                        <p><strong>Rating:</strong> ⭐ ${pg.rating}</p>
+                        <div class="amenities">
+                            ${pg.facilities.map(facility => `<span>${facility}</span>`).join("")}
+                        </div>
+                        <a href="https://www.google.com/maps?q=${pg.latitude},${pg.longitude}" target="_blank">🌍 View Location</a>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        renderPGs();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boys PG - PG Finder</title>
+    <link rel="stylesheet" href="style1.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+        }
+
+        .div {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            height: 60px;
+        }
+
+        .logo img {
+            max-height: 35px;
+            width: auto;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .navi {
+            display: flex;
+            gap: 1.2rem;
+            align-items: center;
+            height: 100%;
+        }
+
+        .navi a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .navi a:not(.login-btn)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .navi a:not(.login-btn):hover::after {
+            width: 80%;
+        }
+
+        .navi a:hover {
+            color: #ffffff;
+            opacity: 0.9;
+        }
+
+        .navi a.active {
+            color: #ffffff;
+            font-weight: 600;
+            opacity: 1;
+        }
+
+        .navi a.active::after {
+            width: 80%;
+        }
+
+        .login-btn {
+            background: #ff8c42;
+            color: #ffffff !important;
+            font-weight: 600;
+            padding: 0.5rem 1rem !important;
+            border: none;
+            height: auto;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .login-btn:hover {
+            background: #ff6b42;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 140, 66, 0.2);
+        }
+
+        .boys-pg-hero {
+            background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
+                        url('./images/boys-pg-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            height: auto;
+            min-height: 5vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #1a2128;
+            margin-top: 80px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 20px 0;
+            width: 100%;
+            max-width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .boys-pg-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(53, 122, 189, 0.1));
+            z-index: 1;
+        }
+
+        .boys-pg-hero .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 8px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .boys-pg-hero h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            position: relative;
+            text-shadow: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            z-index: 2;
+            font-weight: 700;
+            color: #1a2128;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 20px;
+            border-radius: 6px;
+            border: 1px solid #4a90e2;
+            line-height: 1.2;
+        }
+
+        .boys-pg-hero h1 i {
+            color: #ff8c42;
+            font-size: 2rem;
+            text-shadow: none;
+        }
+
+        .boys-pg-hero p {
+            font-size: 1.1rem;
+            max-width: 400px;
+            margin: 0;
+            position: relative;
+            text-shadow: none;
+            color: #1a2128;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            z-index: 2;
+            line-height: 1.4;
+        }
+
+        .search-filter-container {
+            background: #f8f9fa;
+            padding: 1.2rem 5%;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-filter-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-bar, .filter-dropdown {
+            height: 42px;
+            padding: 0 1rem;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: white;
+            color: #1a2128;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-bar:focus, .filter-dropdown:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .filter-dropdown {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+
+        .pg-listing {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .pg-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-width: 380px;
+            margin: 0 auto;
+            width: 100%;
+            border: 1px solid #eee;
+        }
+
+        .pg-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: #4a90e2;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .slider-container img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s ease-in-out;
+            position: absolute;
+            opacity: 0;
+        }
+
+        .slider-container img.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slider-container img.prev {
+            transform: translateX(-100%);
+        }
+
+        .slider-container img.next {
+            transform: translateX(100%);
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            font-size: 1.2em;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            opacity: 0;
+            backdrop-filter: blur(4px);
+        }
+
+        .slider-btn.prev-btn {
+            left: 10px;
+        }
+
+        .slider-btn.next-btn {
+            right: 10px;
+        }
+
+        .slider-container:hover .slider-btn {
+            opacity: 1;
+        }
+
+        .slider-btn:hover {
+            background: rgba(74, 144, 226, 0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 2;
+        }
+
+        .slider-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-indicator.active {
+            background: #4a90e2;
+            transform: scale(1.2);
+        }
+
+        .pg-card-content {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .pg-card-content h3 {
+            color: #1a2128;
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.3;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pg-card-content p {
+            color: #1a2128;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            padding: 0.2rem 0;
+        }
+
+        .pg-card-content p strong {
+            color: #1a2128;
+            min-width: 80px;
+            font-weight: 600;
+        }
+
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.3rem 0;
+        }
+
+        .amenities span {
+            background: #f8f9fa;
+            color: #1a2128;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 1px solid #eee;
+        }
+
+        .amenities span:hover {
+            background: #4a90e2;
+            color: white;
+            transform: translateY(-2px);
+            border-color: #4a90e2;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+        }
+
+        .pg-card-content a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.6rem 1rem;
+            background: #4a90e2;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            flex: 1;
+            font-size: 0.9rem;
+            border: 1px solid #4a90e2;
+        }
+
+        .pg-card-content a:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+            border-color: #357abd;
+        }
+
+        .rating {
+            color: #ffc107;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            text-shadow: none;
+            padding: 0.2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .div {
+                padding: 0 15px;
+            }
+
+            nav {
+                padding: 0;
+                height: 50px;
+            }
+
+            .logo img {
+                max-height: 30px;
+            }
+
+            .navi {
+                gap: 0.8rem;
+            }
+
+            .navi a {
+                font-size: 0.85rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .login-btn {
+                padding: 0.4rem 0.8rem !important;
+            }
+
+            .boys-pg-hero {
+                min-height: 4vh;
+                margin-top: 70px;
+                padding: 15px 0;
+            }
+
+            .boys-pg-hero h1 {
+                font-size: 1.5rem;
+                padding: 6px 16px;
+            }
+
+            .boys-pg-hero h1 i {
+                font-size: 1.6rem;
+            }
+
+            .boys-pg-hero p {
+                font-size: 1rem;
+                padding: 4px 12px;
+            }
+
+            .search-filter-container {
+                padding: 1rem 5%;
+            }
+
+            .search-filter-wrapper {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .search-bar, .filter-dropdown {
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .div {
+                padding: 0 12px;
+            }
+
+            nav {
+                height: 45px;
+            }
+
+            .logo img {
+                max-height: 28px;
+            }
+
+            .navi {
+                gap: 0.6rem;
+            }
+
+            .navi a {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.5rem;
+            }
+
+            .login-btn {
+                padding: 0.3rem 0.6rem !important;
+            }
+
+            .boys-pg-hero {
+                min-height: 3vh;
+                margin-top: 65px;
+                padding: 12px 0;
+            }
+
+            .boys-pg-hero h1 {
+                font-size: 1.3rem;
+                padding: 4px 12px;
+            }
+
+            .boys-pg-hero h1 i {
+                font-size: 1.4rem;
+            }
+
+            .boys-pg-hero p {
+                font-size: 0.95rem;
+                padding: 3px 10px;
+            }
+
+            .search-filter-container {
+                padding: 0.8rem 5%;
+            }
+
+            .search-filter-wrapper {
+                gap: 0.6rem;
+            }
+
+            .search-bar, .filter-dropdown {
+                height: 38px;
+                font-size: 0.9rem;
+            }
+        }
+
+        footer {
+            background: #1a2128;
+            color: #ffffff;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: #4a90e2;
+        }
+
+        .footer-section p {
+            color: #a0a0a0;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #4a90e2;
+            transform: translateY(-3px);
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: #a0a0a0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #4a90e2;
+            transform: translateX(5px);
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            color: #a0a0a0;
+        }
+
+        .contact-info i {
+            color: #4a90e2;
+            font-size: 1.1rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .contact-info p {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="div">
+            <nav>
+                <div class="logo">
+                    <img src="./images/NAME OF THE WEBSITE.png" alt="PG Finder Logo" style="max-height: 35px; width: auto;"/>
+                </div>
+                <div class="navi">
+                    <a href="homepage.html">Home</a>
+                    <a href="BoysPG.html" class="active">Boys PG</a>
+                    <a href="GirlsPG.html">Girls PG</a>
+                    <a href="AboutUs.html">About</a>
+                    <a href="ContactUs.html">Contact</a>
+                    <a href="index.html" class="login-btn">Login</a>
+                </div>
+            </nav> 
+        </div>
+    </header>
+
+    <section class="boys-pg-hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-home"></i> Boys PG</h1>
+            <p>Find your perfect accommodation</p>
+        </div>
+    </section>
+
+    <section class="search-filter-container">
+        <div class="search-filter-wrapper">
+            <input type="text" class="search-bar" id="searchBar" placeholder="Search by location or name..." onkeyup="filterPGs()">
+            <select class="filter-dropdown" id="priceFilter" onchange="filterPGs()">
+                <option value="">Filter by Price Range</option>
+                <option value="3500">Below ₹3,500</option>
+                <option value="4000">Below ₹4,000</option>
+                <option value="4500">Below ₹4,500</option>
+                <option value="5000">Below ₹5,000</option>
+                <option value="10000">Below ₹10,000</option>
+                <option value="15000">Below ₹15,000</option>
+            </select>
+            <select class="filter-dropdown" id="reviewFilter" onchange="filterPGs()">
+                <option value="">Filter by Rating</option>
+                <option value="3.0">3.0 & Above</option>
+                <option value="3.5">3.5 & Above</option>
+                <option value="4.0">4.0 & Above</option>
+                <option value="4.5">4.5 & Above</option>
+            </select>
+        </div>
+    </section>
+
+    <section class="pg-listing" id="pgListing"></section>
+
+    <footer>
+        <div class="div">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About PG Finder</h3>
+                    <p>PG Finder is your trusted platform for finding the perfect PG accommodation. We connect students and professionals with verified and comfortable PGs across India.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="homepage.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="BoysPG.html"><i class="fas fa-chevron-right"></i> Boys PG</a></li>
+                        <li><a href="GirlsPG.html"><i class="fas fa-chevron-right"></i> Girls PG</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 123 PG Street, City, Country</p>
+                        <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                        <p><i class="fas fa-envelope"></i> info@pgfinder.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PG Finder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const pgData = [
+            {
+                name: "Vrindavan PG",
+                owner: "Manohar Pawar",
+                price: 3200,
+                deposit: 6400,
+                rating: "⭐ 3.8",
+                images: ["./images/Vridawan PG/Vridhawan PG.png"],
+                location: "https://maps.app.goo.gl/H8NcrbeELqGMti4m7",
+                contact: "+919657724715",
+                facilities: ["🚀 WiFi", "🚗 Parking", "🛅 Security", "💧 Water 24/7"]
+            },
+            {
+                name: "Basweshwar PG",
+                owner: "Ramesh Patil",
+                price: 3500,
+                deposit: 4500,
+                rating: "⭐ 3.8",
+                images: ["./images/Basweshwar PG/PG1.jpg"],
+                location: "#",
+                contact: "#",
+                facilities: ["🚀 WiFi", "🧹 Housekeeping", "🍽 Kitchen", "⚡ Power Backup"]
+            },
+            {
+                name: "Tanvir Villa",
+                owner: "Tanvir",
+                price: 4000,
+                deposit: 12000,
+                rating: "⭐ 4.2",
+                images: ["./images/Tanvir Villa/Screenshot 2025-02-22 100450.png"],
+                location: "https://maps.app.goo.gl/7pfV6WJPPgDZMysQ6",
+                contact: "+919096138325",
+                facilities: ["🚗 Parking", "🛅 Security", "🛋 Common Area", "💧 Water 24/7"]
+            },
+            {
+                name: "Shrinath Baba Krupaprasad",
+                owner: "Shimpi",
+                price: 3750,
+                deposit: 5000,
+                rating: "⭐ 4.2",
+                images: ["./images/Shrinath Baba Krupaprasad/Screenshot 2025-02-22 095427.png"],
+                location: "https://maps.app.goo.gl/7pfV6WJPPgDZMysQ6",
+                contact: "+919890042495",
+                facilities: ["🚀 WiFi", "🍽 Kitchen", "⚡ Power Backup", "🛋 Common Area"]
+            }
+        ];
+
+        let currentImageIndex = {};
+
+        function renderPGs(pgList = pgData) {
+            const pgListing = document.getElementById("pgListing");
+            pgListing.innerHTML = "";
+
+            pgList.forEach((pg, index) => {
+                currentImageIndex[index] = 0;
+                const amenitiesHTML = pg.facilities.map(facility => `<span>${facility}</span>`).join('');
+                const indicatorsHTML = pg.images.map((_, i) => 
+                    `<div class="slider-indicator ${i === 0 ? 'active' : ''}" onclick="goToImage(${index}, ${i})"></div>`
+                ).join('');
+
+                pgListing.innerHTML += `
+                    <div class="pg-card">
+                        <div class="slider-container">
+                            <button class="slider-btn prev-btn" onclick="prevImage(${index})">❮</button>
+                            ${pg.images.map((img, i) => `
+                                <img id="pg-image-${index}-${i}" 
+                                     src="${img}" 
+                                     alt="${pg.name}"
+                                     class="${i === 0 ? 'active' : ''}"
+                                     style="display: ${i === 0 ? 'block' : 'none'}">
+                            `).join('')}
+                            <button class="slider-btn next-btn" onclick="nextImage(${index})">❯</button>
+                            <div class="slider-indicators">
+                                ${indicatorsHTML}
+                            </div>
+                        </div>
+                        <div class="pg-card-content">
+                            <h3>${pg.name}</h3>
+                            <p><strong>Owner:</strong> ${pg.owner}</p>
+                            <p><strong>Rent:</strong> ₹${pg.price}/month</p>
+                            <p><strong>Deposit:</strong> ₹${pg.deposit}</p>
+                            <p><strong>Rating:</strong> ${pg.rating}</p>
+                            <div class="amenities">
+                                ${amenitiesHTML}
+                            </div>
+                            <div class="button-container">
+                                <a href="${pg.location}" target="_blank" onclick="return checkLogin(event, null, this)">🌍 View Location</a>
+                                <a href="tel:${pg.contact}" onclick="return checkLogin(event, '${pg.contact}', null)">📞 Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Initialize touch events for the slider
+                initializeTouchEvents(index);
+            });
+        }
+
+        function prevImage(index) {
+            const images = document.querySelectorAll(`#pg-image-${index}`);
+            const indicators = document.querySelectorAll(`.pg-card:nth-child(${index + 1}) .slider-indicator`);
+            const currentIndex = currentImageIndex[index];
+            
+            // Update current image
+            images[currentIndex].classList.remove('active');
+            images[currentIndex].style.display = 'none';
+            
+            // Update previous image
+            currentImageIndex[index] = (currentIndex - 1 + images.length) % images.length;
+            images[currentImageIndex[index]].classList.add('active');
+            images[currentImageIndex[index]].style.display = 'block';
+            
+            // Update indicators
+            indicators[currentIndex].classList.remove('active');
+            indicators[currentImageIndex[index]].classList.add('active');
+        }
+
+        function nextImage(index) {
+            const images = document.querySelectorAll(`#pg-image-${index}`);
+            const indicators = document.querySelectorAll(`.pg-card:nth-child(${index + 1}) .slider-indicator`);
+            const currentIndex = currentImageIndex[index];
+            
+            // Update current image
+            images[currentIndex].classList.remove('active');
+            images[currentIndex].style.display = 'none';
+            
+            // Update next image
+            currentImageIndex[index] = (currentIndex + 1) % images.length;
+            images[currentImageIndex[index]].classList.add('active');
+            images[currentImageIndex[index]].style.display = 'block';
+            
+            // Update indicators
+            indicators[currentIndex].classList.remove('active');
+            indicators[currentImageIndex[index]].classList.add('active');
+        }
+
+        function goToImage(index, targetIndex) {
+            const images = document.querySelectorAll(`#pg-image-${index}`);
+            const indicators = document.querySelectorAll(`.pg-card:nth-child(${index + 1}) .slider-indicator`);
+            const currentIndex = currentImageIndex[index];
+            
+            if (targetIndex === currentIndex) return;
+            
+            // Update current image
+            images[currentIndex].classList.remove('active');
+            images[currentIndex].style.display = 'none';
+            
+            // Update target image
+            currentImageIndex[index] = targetIndex;
+            images[currentImageIndex[index]].classList.add('active');
+            images[currentImageIndex[index]].style.display = 'block';
+            
+            // Update indicators
+            indicators[currentIndex].classList.remove('active');
+            indicators[currentImageIndex[index]].classList.add('active');
+        }
+
+        function initializeTouchEvents(index) {
+            const slider = document.querySelector(`.pg-card:nth-child(${index + 1}) .slider-container`);
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            slider.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            }, false);
+
+            slider.addEventListener('touchmove', (e) => {
+                touchEndX = e.touches[0].clientX;
+            }, false);
+
+            slider.addEventListener('touchend', () => {
+                const swipeDistance = touchStartX - touchEndX;
+                if (Math.abs(swipeDistance) > 50) { // Minimum swipe distance
+                    if (swipeDistance > 0) {
+                        nextImage(index);
+                    } else {
+                        prevImage(index);
+                    }
+                }
+            }, false);
+        }
+
+        function filterPGs() {
+            const searchQuery = document.getElementById('searchBar').value.toLowerCase();
+            const maxPrice = parseInt(document.getElementById('priceFilter').value) || Infinity;
+            const minRating = parseFloat(document.getElementById('reviewFilter').value) || 0;
+
+            const filteredPGs = pgData.filter(pg => {
+                const ratingValue = parseFloat(pg.rating.split(' ')[1]);
+                return (
+                    pg.name.toLowerCase().includes(searchQuery) &&
+                    pg.price <= maxPrice &&
+                    ratingValue >= minRating
+                );
+            });
+
+            renderPGs(filteredPGs);
+        }
+
+        function checkLogin(event, phoneNumber, locationLink) {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+            if (!isLoggedIn || isLoggedIn !== 'true') {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Login Required',
+                    text: 'Please login first to access this feature!',
+                    confirmButtonText: 'Go to Login'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        localStorage.setItem('redirectUrl', window.location.pathname);
+                        window.location.href = 'index.html';
+                    }
+                });
+                return false;
+            }
+
+            if (locationLink && isLoggedIn === 'true') {
+                return true;
+            }
+
+            if (phoneNumber && isLoggedIn === 'true') {
+                return true;
+            }
+
+            return false;
+        }
+
+        renderPGs();
+    </script>
+</body>
+
+</html>

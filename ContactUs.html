@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - PG Finder</title>
+    <link rel="stylesheet" href="style1.css"/>
+    <link rel="stylesheet" href="contact_style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <header>
+        <div class="div">
+            <nav>
+                <div class="logo">
+                    <img src="./images/NAME OF THE WEBSITE.png" alt="PG Finder Logo" style="max-height: 45px; width: auto;"/>
+                </div>
+                <div class="navi">
+                    <a href="homepage.html">Home</a>
+                    <a href="BoysPG.html">Boys PG</a>
+                    <a href="GirlsPG.html">Girls PG</a>
+                    <a href="AboutUs.html">About</a>
+                    <a href="ContactUs.html" class="active">Contact</a>
+                    <a href="index.html" class="login-btn">Login</a>
+                </div>
+            </nav> 
+        </div>
+    </header>
+
+    <section class="contact-hero">
+        <div class="div">
+            <h1>Contact Us</h1>
+            <p>Have questions or need assistance? We're here to help you find your perfect PG accommodation.</p>
+        </div>
+    </section>
+
+    <div class="div">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-item-content">
+                            <h3>Address</h3>
+                            <p>123 PG Street, City, Country</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div class="contact-item-content">
+                            <h3>Phone</h3>
+                            <p>+1 234 567 890</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="contact-item-content">
+                            <h3>Email</h3>
+                            <p>info@pgfinder.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="contact-item-content">
+                            <h3>Working Hours</h3>
+                            <p>Mon-Sat: 9:00 AM - 8:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h2>Send us a Message</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="div">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About PG Finder</h3>
+                    <p>PG Finder is your trusted platform for finding the perfect PG accommodation. We connect students and professionals with verified and comfortable PGs across India.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="homepage.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="BoysPG.html"><i class="fas fa-chevron-right"></i> Boys PG</a></li>
+                        <li><a href="GirlsPG.html"><i class="fas fa-chevron-right"></i> Girls PG</a></li>
+                        <li><a href="AboutUs.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="ContactUs.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> PCCOE College, Pimpri Chinchwad</p>
+                        <p><i class="fas fa-phone"></i> +91 9322755125</p>
+                        <p><i class="fas fa-envelope"></i> pgfinder0045@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 PG Finder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch('submit.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: data.message,
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('contactForm').reset();
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An error occurred while sending your message. Please try again later.'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

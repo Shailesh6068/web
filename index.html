@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login Page - PG Finder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        /* Header and Navigation */
+        header {
+            width: 100%;
+            background: #1e293b;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .div {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            max-height: 45px;
+            width: auto;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .navi {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .navi a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .navi a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .login-btn {
+            background: #ff8c42;
+            color: #ffffff !important;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem !important;
+            border: none;
+            height: auto;
+            display: inline-flex;
+            align-items: center;
+            font-size: 1.1rem;
+            border-radius: 4px;
+        }
+
+        .login-btn.active, .login-btn:hover {
+            background: #e67e3d;
+        }
+
+        /* Tabs */
+        .header {
+            margin: 20px 0;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .tabs a {
+            font-size: 16px;
+            color: #00c6ff;
+            text-decoration: none;
+            cursor: pointer;
+            padding-bottom: 5px;
+        }
+
+        .tabs a.active {
+            font-weight: bold;
+            border-bottom: 2px solid #00c6ff;
+        }
+
+        /* Login Container */
+        .container {
+            display: flex;
+            width: 800px;
+            max-width: 90%;
+            height: 500px;
+            background: #1e293b;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .left-panel {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            width: 50%;
+            padding: 40px;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .left-panel h2 {
+            font-size: 28px;
+            margin-top: 10px;
+        }
+
+        .left-panel p {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .right-panel {
+            width: 50%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #fff;
+            background: #1e293b;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #9ca3af;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #4b5563;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #1e293b;
+            color: #fff;
+        }
+
+        .error {
+            color: #ff4444;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        button {
+            width: 100%;
+            background: #00c6ff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #4facfe;
+        }
+
+        .submit-btn {
+            background: #ff8c42;
+        }
+
+        .submit-btn:hover {
+            background: #e67e3d;
+        }
+
+        .link {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .link a {
+            color: #00c6ff;
+            text-decoration: none;
+        }
+
+        .logout-btn {
+            width: 100%;
+            background: #ff4444;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 15px;
+        }
+
+        .logout-btn:hover {
+            background: #cc0000;
+        }
+
+        /* Social Login */
+        .social-login {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .social-login p {
+            color: #9ca3af;
+            margin-bottom: 15px;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fff;
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn.google { background: #db4437; color: white; }
+        .social-btn.facebook { background: #3b5998; color: white; }
+        .social-btn.twitter { background: #1da1f2; color: white; }
+
+        .social-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            background: #1e293b;
+            color: #fff;
+            padding: 40px 0;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p, .footer-section ul {
+            font-size: 14px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-section ul li a:hover {
+            color: #00c6ff;
+        }
+
+        .social-links {
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: #fff;
+            font-size: 20px;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #00c6ff;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+        }
+
+        .footer-bottom p {
+            font-size: 14px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .navi {
+                gap: 15px;
+            }
+
+            .navi a {
+                font-size: 1rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .login-btn {
+                padding: 0.5rem 1rem !important;
+                font-size: 1rem;
+            }
+
+            .container {
+                flex-direction: column;
+                width: 100%;
+                max-width: 400px;
+                height: auto;
+                border-radius: 8px;
+            }
+
+            .left-panel {
+                width: 100%;
+                padding: 20px;
+                border-top-right-radius: 8px;
+                border-bottom-left-radius: 0;
+                text-align: center;
+            }
+
+            .left-panel h2 {
+                font-size: 20px;
+            }
+
+            .left-panel p {
+                font-size: 12px;
+            }
+
+            .right-panel {
+                width: 100%;
+                padding: 20px;
+                border-top-right-radius: 0;
+                border-bottom-left-radius: 8px;
+            }
+
+            .input-group, .form-group {
+                margin-bottom: 15px;
+            }
+
+            label {
+                font-size: 12px;
+            }
+
+            input {
+                padding: 10px;
+                font-size: 12px;
+            }
+
+            button {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .link, .social-login p {
+                font-size: 12px;
+            }
+
+            .logout-btn {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-section {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                max-height: 35px;
+            }
+
+            .navi a {
+                font-size: 0.95rem;
+                padding: 0.3rem 0.5rem;
+            }
+
+            .login-btn {
+                padding: 0.4rem 0.8rem !important;
+                font-size: 0.95rem;
+            }
+
+            .tabs a {
+                font-size: 12px;
+            }
+
+            .container {
+                max-width: 300px;
+            }
+
+            .left-panel h2 {
+                font-size: 18px;
+            }
+
+            .left-panel p {
+                font-size: 10px;
+            }
+
+            .right-panel {
+                padding: 15px;
+            }
+
+            input {
+                padding: 8px;
+                font-size: 10px;
+            }
+
+            button {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .link, .social-login p {
+                font-size: 10px;
+            }
+
+            .logout-btn {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .footer-section h3 {
+                font-size: 16px;
+            }
+
+            .footer-section p, .footer-section ul {
+                font-size: 12px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <header>
+        <div class="div">
+            <nav>
+                <div class="logo">
+                    <img src="./images/NAME OF THE WEBSITE.png" alt="PG Finder Logo" style="max-height: 45px; width: auto;"/>
+                </div>
+                <div class="navi">
+                    <a href="homepage.html">Home</a>
+                    <a href="BoysPG.html">Boys PG</a>
+                    <a href="GirlsPG.html">Girls PG</a>
+                    <a href="AboutUs.html">About</a>
+                    <a href="ContactUs.html">Contact</a>
+                    <a href="index.html" class="login-btn active">Login</a>
+                </div>
+            </nav> 
+        </div>
+    </header>
+
+    <div class="header">
+        <div class="tabs">
+            <a href="#" class="active">Login</a>
+            <a href="signup.html">Sign Up</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="left-panel">
+            <h2>Welcome to PGFinder</h2>
+            <p>Your Perfect Stay Awaits!</p>
+        </div>
+
+        <div class="right-panel">
+            <form id="loginForm" action="connect.php" method="post">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+                <p class="link">Don't have an account? <a href="register.html">Sign Up</a></p>
+                <button type="button" class="logout-btn" onclick="logout()">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch('connect.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('username', data.username);
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Login Successful!',
+                        text: `Welcome, ${data.username}!`,
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+
+                    setTimeout(() => {
+                        const redirectUrl = localStorage.getItem('redirectUrl') || 'Boyspg.html';
+                        localStorage.removeItem('redirectUrl');
+                        window.location.href = redirectUrl;
+                    }, 1500);
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: data.message
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong. Please try again later.'
+                });
+            });
+        });
+
+        function logout() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            
+            if (!isLoggedIn || isLoggedIn !== 'true') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Not Logged In',
+                    text: 'Please login first!',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            } else {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Logged Out',
+                    text: 'You have been successfully logged out!',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+        }
+    </script>
+
+        
+
+    <footer>
+        <div class="div">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About PG Finder</h3>
+                    <p>PG Finder is your trusted platform for finding the perfect PG accommodation. We connect students and professionals with verified and comfortable PGs across India.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="homepage.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="BoysPG.html"><i class="fas fa-chevron-right"></i> Boys PG</a></li>
+                        <li><a href="GirlsPG.html"><i class="fas fa-chevron-right"></i> Girls PG</a></li>
+                        <li><a href="AboutUs.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="ContactUs.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> PCCOE College, Pimpri Chinchwad</p>
+                        <p><i class="fas fa-phone"></i> +91 9322755125</p>
+                        <p><i class="fas fa-envelope"></i> pgfinder0045@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 PG Finder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

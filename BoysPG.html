@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boys PG - PG Finder</title>
+    <link rel="stylesheet" href="style1.css"/>
+    <link rel="stylesheet" href="BoysPG.css"/>
+    <linkAppointments rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <header>
+        <div class="div">
+            <nav>
+                <div class="logo">
+                    <img src="./images/NAME OF THE WEBSITE.png" alt="PG Finder Logo" style="max-height: 45px; width: auto;"/>
+                </div>
+                <div class="navi">
+                    <a href="homepage.html">Home</a>
+                    <a href="BoysPG.html" class="active">Boys PG</a>
+                    <a href="GirlsPG.html">Girls PG</a>
+                    <a href="AboutUs.html">About</a>
+                    <a href="ContactUs.html">Contact</a>
+                    <a href="index.html" class="login-btn">Login</a>
+                </div>
+            </nav> 
+        </div>
+    </header>
+
+    <section class="boys-pg-hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-home"></i> Boys PG</h1>
+            <p>Find your perfect accommodation</p>
+        </div>
+    </section>
+
+    <section class="search-filter-container">
+        <div class="search-filter-wrapper">
+            <input type="text" class="search-bar" id="searchBar" placeholder="Search by location or name..." onkeyup="filterPGs()">
+            <select class="filter-dropdown" id="priceFilter" onchange="filterPGs()">
+                <option value="">Filter by Price Range</option>
+                <option value="3500">Below ₹3,500</option>
+                <option value="4000">Below ₹4,000</option>
+                <option value="4500">Below ₹4,500</option>
+                <option value="5000">Below ₹5,000</option>
+                <option value="10000">Below ₹10,000</option>
+                <option value="15000">Below ₹15,000</option>
+            </select>
+            <select class="filter-dropdown" id="reviewFilter" onchange="filterPGs()">
+                <option value="">Filter by Rating</option>
+                <option value="3.0">3.0 & Above</option>
+                <option value="3.5">3.5 & Above</option>
+                <option value="4.0">4.0 & Above</option>
+                <option value="4.5">4.5 & Above</option>
+            </select>
+        </div>
+    </section>
+
+    <section class="pg-listing" id="pgListing"></section>
+
+    <footer>
+        <div class="div">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About PG Finder</h3>
+                    <p>PG Finder is your trusted platform for finding the perfect PG accommodation. We connect students and professionals with verified and comfortable PGs across India.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="homepage.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="BoysPG.html"><i class="fas fa-chevron-right"></i> Boys PG</a></li>
+                        <li><a href="GirlsPG.html"><i class="fas fa-chevron-right"></i> Girls PG</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> PCCOE College, Pimpri Chinchwad</p>
+                        <p><i class="fas fa-phone"></i> +91 9322755125</p>
+                        <p><i.value="email"><i class="fas fa-envelope"></i> pgfinder0045@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 PG Finder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const pgData = [
+            {
+                name: "Vrindavan PG",
+                owner: "Manohar Pawar",
+                price: 3200,
+                deposit: 6400,
+                rating: "⭐ 3.8",
+                images: ["pg img/Vridhawan PG/img1.jpg", "pg img/Vridhawan PG/img2.jpg", "pg img/Vridhawan PG/img3.jpg"],
+                location: "https://maps.app.goo.gl/H8NcrbeELqGMti4m7",
+                contact: "+919657724715",
+                facilities: ["🚀 WiFi", "🚗 Parking", "🛅 Security", "💧 Water 24/7"]
+            },
+            {
+                name: "Basweshwar PG",
+                owner: "Ramesh Patil",
+                price: 3500,
+                deposit: 4500,
+                rating: "⭐ 3.8",
+                images: ["./images/Basweshwar PG/PG1.jpg"],
+                location: "#",
+                contact: "#",
+                facilities: ["🚀 WiFi", "🧹 Housekeeping", "🍽 Kitchen", "⚡ Power Backup"]
+            },
+            {
+                name: "Tanvir Villa",
+                owner: "Tanvir",
+                price: 4000,
+                deposit: 12000,
+                rating: "⭐ 4.2",
+                images: ["./images/Tanvir Villa/Screenshot 2025-02-22 100450.png"],
+                location: "https://maps.app.goo.gl/7pfV6WJPPgDZMysQ6",
+                contact: "+919096138325",
+                facilities: ["🚗 Parking", "🛅 Security", "🛋 Common Area", "💧 Water 24/7"]
+            },
+            {
+                name: "Shrinath Baba Krupaprasad",
+                owner: "Shimpi",
+                price: 3750,
+                deposit: 5000,
+                rating: "⭐ 4.2",
+                images: ["./images/Shrinath Baba Krupaprasad/Screenshot 2025-02-22 095427.png"],
+                location: "https://maps.app.goo.gl/7pfV6WJPPgDZMysQ6",
+                contact: "+919890042495",
+                facilities: ["🚀 WiFi", "🍽 Kitchen", "⚡ Power Backup", "🛋 Common Area"]
+            }
+        ];
+
+        let currentImageIndex = {};
+        let slideIntervals = {};
+
+        function renderPGs(pgList = pgData) {
+            const pgListing = document.getElementById("pgListing");
+            pgListing.innerHTML = "";
+
+            pgList.forEach((pg, index) => {
+                currentImageIndex[index] = 0;
+                const amenitiesHTML = pg.facilities.map(facility => `<span>${facility}</span>`).join('');
+                const indicatorsHTML = pg.images.map((_, i) => 
+                    `<div class="slider-indicator ${i === 0 ? 'active' : ''}" onclick="goToImage(${index}, ${i})"></div>`
+                ).join('');
+
+                pgListing.innerHTML += `
+                    <div class="pg-card">
+                        <div class="slider-container">
+                            <button class="slider-btn prev-btn" onclick="prevImage(${index}); pauseSlide(${index})">❮</button>
+                            ${pg.images.map((img, i) => `
+                                <img id="pg-image-${index}-${i}" 
+                                     src="${img}" 
+                                     alt="${pg.name}"
+                                     class="${i === 0 ? 'active' : ''}"
+                                     style="display: ${i === 0 ? 'block' : 'none'}">
+                            `).join('')}
+                            <button class="slider-btn next-btn" onclick="nextImage(${index}); pauseSlide(${index})">❯</button>
+                            <div class="slider-indicators">
+                                ${indicatorsHTML}
+                            </div>
+                        </div>
+                        <div class="pg-card-content">
+                            <h3>${pg.name}</h3>
+                            <p><strong>Owner:</strong> ${pg.owner}</p>
+                            <p><strong>Rent:</strong> ₹${pg.price}/month</p>
+                            <p><strong>Deposit:</strong> ₹${pg.deposit}</p>
+                            <p><strong>Rating:</strong> ${pg.rating}</p>
+                            <div class="amenities">
+                                ${amenitiesHTML}
+                            </div>
+                            <div class="button-container">
+                                <a href="${pg.location}" target="_blank" onclick="return checkLogin(event, null, this)">🌍 View Location</a>
+                                <a href="tel:${pg.contact}" onclick="return checkLogin(event, '${pg.contact}', null)">📞 Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                initializeTouchEvents(index);
+                startSlide(index);
+            });
+        }
+
+        function prevImage(index) {
+            const card = document.querySelector(`.pg-card:nth-child(${index + 1})`);
+            const images = card.querySelectorAll('img');
+            const indicators = card.querySelectorAll('.slider-indicator');
+            const currentIndex = currentImageIndex[index];
+            
+            images[currentIndex].classList.remove('active');
+            images[currentIndex].style.display = 'none';
+            
+            currentImageIndex[index] = (currentIndex - 1 + images.length) % images.length;
+            images[currentImageIndex[index]].classList.add('active');
+            images[currentImageIndex[index]].style.display = 'block';
+            
+            indicators[currentIndex].classList.remove('active');
+            indicators[currentImageIndex[index]].classList.add('active');
+        }
+        
+        function nextImage(index) {
+            const card = document.querySelector(`.pg-card:nth-child(${index + 1})`);
+            const images = card.querySelectorAll('img');
+            const indicators = card.querySelectorAll('.slider-indicator');
+            const currentIndex = currentImageIndex[index];
+            
+            images[currentIndex].classList.remove('active');
+            images[currentIndex].style.display = 'none';
+            
+            currentImageIndex[index] = (currentIndex + 1) % images.length;
+            images[currentImageIndex[index]].classList.add('active');
+            images[currentImageIndex[index]].style.display = 'block';
+            
+            indicators[currentIndex].classList.remove('active');
+            indicators[currentImageIndex[index]].classList.add('active');
+        }
+        
+        function goToImage(index, targetIndex) {
+            const card = document.querySelector(`.pg-card:nth-child(${index + 1})`);
+            const images = card.querySelectorAll('img');
+            const indicators = card.querySelectorAll('.slider-indicator');
+            const currentIndex = currentImageIndex[index];
+            
+            if (targetIndex === currentIndex) return;
+            
+            images[currentIndex].classList.remove('active');
+            images[currentIndex].style.display = 'none';
+            
+            currentImageIndex[index] = targetIndex;
+            images[currentImageIndex[index]].classList.add('active');
+            images[currentImageIndex[index]].style.display = 'block';
+            
+            indicators[currentIndex].classList.remove('active');
+            indicators[currentImageIndex[index]].classList.add('active');
+        }
+
+        function initializeTouchEvents(index) {
+            const slider = document.querySelector(`.pg-card:nth-child(${index + 1}) .slider-container`);
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            slider.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                pauseSlide(index); // Pause on touch
+            }, false);
+
+            slider.addEventListener('touchmove', (e) => {
+                touchEndX = e.touches[0].clientX;
+            }, false);
+
+            slider.addEventListener('touchend', () => {
+                const swipeDistance = touchStartX - touchEndX;
+                if (Math.abs(swipeDistance) > 50) {
+                    if (swipeDistance > 0) {
+                        nextImage(index);
+                    } else {
+                        prevImage(index);
+                    }
+                }
+                startSlide(index); // Resume after swipe
+            }, false);
+        }
+
+        function startSlide(index) {
+            if (slideIntervals[index]) {
+                clearInterval(slideIntervals[index]);
+            }
+            slideIntervals[index] = setInterval(() => {
+                nextImage(index);
+            }, 3000); // 3-second interval
+        }
+
+        function pauseSlide(index) {
+            if (slideIntervals[index]) {
+                clearInterval(slideIntervals[index]);
+                delete slideIntervals[index];
+            }
+        }
+
+        function filterPGs() {
+            const searchQuery = document.getElementById('searchBar').value.toLowerCase();
+            const maxPrice = parseInt(document.getElementById('priceFilter').value) || Infinity;
+            const minRating = parseFloat(document.getElementById('reviewFilter').value) || 0;
+
+            const filteredPGs = pgData.filter(pg => {
+                const ratingValue = parseFloat(pg.rating.split(' ')[1]);
+                return (
+                    pg.name.toLowerCase().includes(searchQuery) &&
+                    pg.price <= maxPrice &&
+                    ratingValue >= minRating
+                );
+            });
+
+            // Clear all intervals before re-rendering
+            Object.keys(slideIntervals).forEach(index => clearInterval(slideIntervals[index]));
+            slideIntervals = {};
+            renderPGs(filteredPGs);
+        }
+
+        function checkLogin(event, phoneNumber, locationLink) {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+            if (!isLoggedIn || isLoggedIn !== 'true') {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Login Required',
+                    text: 'Please login first to access this feature!',
+                    confirmButtonText: 'Go to Login'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        localStorage.setItem('redirectUrl', window.location.pathname);
+                        window.location.href = 'index.html';
+                    }
+                });
+                return false;
+            }
+
+            if (locationLink && isLoggedIn === 'true') {
+                return true;
+            }
+
+            if (phoneNumber && isLoggedIn === 'true') {
+                return true;
+            }
+
+            return false;
+        }
+
+        // Initial render
+        renderPGs();
+    </script>
+</body>
+</html>

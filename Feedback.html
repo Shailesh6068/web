@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        body {
+            background-color: #0d1b2a;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: linear-gradient(135deg, #1b263b, #293a5f);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 420px;
+            transition: transform 0.3s;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        h2 {
+            color: #00a8e8;
+            font-size: 30px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        label {
+            font-weight: bold;
+            color: #ffffff;
+            display: block;
+            text-align: left;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 2px solid #00a8e8;
+            border-radius: 10px;
+            background-color: #0d1b2a;
+            color: white;
+            box-sizing: border-box;
+            font-size: 15px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #0077b6;
+            outline: none;
+            box-shadow: 0px 0px 10px rgba(0, 168, 232, 0.5);
+        }
+
+        textarea {
+            resize: none;
+            height: 90px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #00a8e8, #0077b6);
+            color: white;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #0077b6, #005f99);
+        }
+
+        p {
+            margin-top: 15px;
+            color: #ffffff;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Contact Us</h2>
+        <p>You will hear from us at the earliest!</p>
+
+        <label for="text">Name:</label>
+        <input type="text" id="text" placeholder="Enter your name">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter your email">
+
+        <label for="tel">Phone No:</label>
+        <input type="tel" id="tel" placeholder="Enter your phone">
+
+        <label for="comment">Comments/Queries:</label>
+        <textarea id="comment" placeholder="Any comment or your query"></textarea>
+
+        <button>Send</button>
+    </div>
+</body>
+</html>

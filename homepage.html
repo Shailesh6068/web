@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PG Finder - Find Your Perfect PG Accommodation</title>
+    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+        }
+
+        .div {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            height: 60px;
+        }
+
+        .logo img {
+            max-height: 45px;
+            width: auto;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .navi {
+            display: flex;
+            gap: 1.2rem;
+            align-items: center;
+            height: 100%;
+        }
+
+        .navi a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .navi a:not(.login-btn)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .navi a:not(.login-btn):hover::after {
+            width: 80%;
+        }
+
+        .navi a:hover {
+            color: #ffffff;
+            opacity: 0.9;
+        }
+
+        .navi a.active {
+            color: #ffffff;
+            font-weight: 600;
+            opacity: 1;
+        }
+
+        .navi a.active::after {
+            width: 80%;
+        }
+
+        .login-btn {
+            background: #ff8c42;
+            color: #ffffff !important;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem !important;
+            border: none;
+            height: auto;
+            display: inline-flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .login-btn:hover {
+            background: #ff6b42;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 140, 66, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .div {
+                padding: 0 15px;
+            }
+
+            nav {
+                padding: 0;
+                height: 50px;
+            }
+
+            .logo img {
+                max-height: 40px;
+            }
+
+            .navi {
+                gap: 0.8rem;
+            }
+
+            .navi a {
+                font-size: 1rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .login-btn {
+                padding: 0.5rem 1rem !important;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .div {
+                padding: 0 12px;
+            }
+
+            nav {
+                height: 45px;
+            }
+
+            .logo img {
+                max-height: 35px;
+            }
+
+            .navi {
+                gap: 0.6rem;
+            }
+
+            .navi a {
+                font-size: 0.95rem;
+                padding: 0.3rem 0.5rem;
+            }
+
+            .login-btn {
+                padding: 0.4rem 0.8rem !important;
+                font-size: 0.95rem;
+            }
+        }
+
+        footer {
+            background: #000000;
+            color: #ffffff;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: #4a90e2;
+        }
+
+        .footer-section p {
+            color: #a0a0a0;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #4a90e2;
+            transform: translateY(-3px);
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: #a0a0a0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #4a90e2;
+            transform: translateX(5px);
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            color: #a0a0a0;
+        }
+
+        .contact-info i {
+            color: #4a90e2;
+            font-size: 1.1rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .contact-info p {
+                justify-content: center;
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            max-width: 1000px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+                white-space: normal;
+                max-width: 700px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+                max-width: 100%;
+            }
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .features h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #4a90e2;
+            border-radius: 2px;
+        }
+
+        .features {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            color: #4a90e2;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+        }
+
+        .feature-item p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="div">
+            <nav>
+                <div class="logo">
+                    <img src="./images/NAME OF THE WEBSITE.png" alt="PG Finder Logo" style="max-height: 45px; width: auto;"/>
+                </div>
+                <div class="navi">
+                    <a href="homepage.html" class="active">Home</a>
+                    <a href="BoysPG.html">Boys PG</a>
+                    <a href="GirlsPG.html">Girls PG</a>
+                    <a href="AboutUs.html">About</a>
+                    <a href="ContactUs.html">Contact</a>
+                    <a href="index.html" class="login-btn">Login</a>
+                </div>
+            </nav> 
+        </div>
+    </header>
+
+    <section class="hero" style="background-image: url('images/Front Page of the website.webp');">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Find Your Perfect PG Accommodation</h1>
+                <p class="hero-subtitle">Discover comfortable and affordable PG options for students and professionals</p>
+                <div class="hero-buttons">
+                    <a href="BoysPG.html" class="primary-btn">
+                        <i class="fas fa-male"></i> Find Boys PG
+                    </a>
+                    <a href="GirlsPG.html" class="secondary-btn">
+                        <i class="fas fa-female"></i> Find Girls PG
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2>Why Choose Us</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-check-circle"></i>
+                <h3>Verified PGs</h3>
+                <p>All listed PGs are verified for safety and quality</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-rupee-sign"></i>
+                <h3>Best Prices</h3>
+                <p>Find PGs at competitive prices in your PCCOE College area</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Prime Locations</h3>
+                <p>PGs located near PCCOE college</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>Round-the-clock assistance for all queries</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="div">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About PG Finder</h3>
+                    <p>PG Finder is your trusted platform for finding the perfect PG accommodation. We connect students and professionals with verified and comfortable PGs across India.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="homepage.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="BoysPG.html"><i class="fas fa-chevron-right"></i> Boys PG</a></li>
+                        <li><a href="GirlsPG.html"><i class="fas fa-chevron-right"></i> Girls PG</a></li>
+                        <li><a href="AboutUs.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="ContactUs.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> PCCOE College, Pimpri Chinchwad</p>
+                        <p><i class="fas fa-phone"></i> +91 9322755125</p>
+                        <p><i class="fas fa-envelope"></i> pgfinder0045@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PG Finder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
